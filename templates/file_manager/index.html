@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load icons %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{% static 'webfonts/font-roboto.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css'%}">
+    <link rel="stylesheet" href="{% static 'css/drive.css' %}">
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <title>Khanh's Drive</title>
+</head>
+{% icon 'edit' %}
+<body>
+    <div class="sidebar">
+        <ul>
+            <!-- <form method="post" action="{% url 'file_manager' %}" style="width: 100px; height: 60px; display: inline-block;">
+                {% csrf_token %}
+                <input type="hidden"  value="a">
+                <button id="uploadbut" name="uploadFile" type="submit" value="a">Upload</button>
+            </form> -->
+            <form method="post" action="{% url 'file_manager' %}" enctype="multipart/form-data" style="width: 100px; height: 60px; display: inline-block;">
+                {% csrf_token %}
+                {{ form.file }} 
+                <!--  Hidden input -->
+                <input type="hidden"  value="a">
+                <button id="uploadButton" type="submit" value="">
+                    <li><i class="fa fa-plus"></i>Mới</li>
+                </button>
+            </form>
+            <form method="post" action="{% url 'home' %}"style="width: 150px; height: 45px; display: inline-block;">
+                {% csrf_token %}
+                <button name="return_home" type="submit" value="">
+                    <li style="text-align: left;"><i class="fas fa-home fa-2x" style="width: 30%; float: left; position: relative; bottom: 5px;"></i>Home</li>
+                </button>
+            </form>
+            <form method="post" action="{% url 'file_manager' %}"style="width: 150px; height: 45x; display: inline-block;">
+                {% csrf_token %}
+                <button name="return_home" type="submit" value="">
+                    <li class="active" style="text-align: left;"><i class="fas fa-hdd fa-2x" style="width: 30%;float: left; position: relative; bottom: 5px;"></i> My Drive</li>
+                </button>
+            </form>
+            <form method="post" action="{% url 'file_manager' %}"style="width: 150px; height: 45x; display: inline-block;">
+                {% csrf_token %}
+                <button name="check_trash" type="submit" value="">
+                    <li style="text-align: left;"><i class="fas fa-trash fa-2x" style="width: 30%;float: left; position: relative; bottom: 5px;"></i> Trash</li>
+                </button>
+            </form>
+            <!-- <li><i class="fa fa-desktop"></i> Computers</li> -->
+            <!-- <li><i class="fa fa-users"></i> Shared with me</li> -->
+            <!-- <li><i class="fa fa-history"></i> Recent</li> -->
+            <!-- <li><i class="fa fa-star"></i> Starred</li> -->
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h2 style="margin-left: 10%; color: aliceblue;">My Drive</h2>
+        <div class="file-list">
+            <ul style="list-style-type: none;">
+                {% for folder in folders %}
+                <form method="post" action="{% url 'file_manager' %}" style="width: 150px; height: 150px; display: inline-block;">
+                    {% csrf_token %}
+                    <button class="image-container" name="enter_folder" type="submit" value="{{folder}}" style="padding: 0; border: none; background: none;">
+                        <img src="{% static 'img/folder.png' %}" >
+                        <div class="folder-name">{{folder}}</div>
+                    </button>
+                </form>
+                {% endfor %}
+                {% for file in files %}
+                    
+                    <li>
+                        <!-- {% icon file.type %} -->
+                        <form method="post" action="{% url 'file_manager' %}" style="width: auto; height: auto;">
+                            {% csrf_token %}
+                            <input type="hidden"  value="{{ file }}">
+                            <button id="image-showing"type="submit" value="{{ file }}">
+                                {% if file.type == 'image' %}
+                                    <img src="{{file.source}}" alt="{{file.file}}">
+                                {% endif %}
+                                
+                            </button>
+                            <!-- <div class="dropdown">
+                                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                                <div id="myDropdown" class="dropdown-content">
+                                  <a href="#home">Home</a>
+                                  <a href="#about">About</a>
+                                  <a href="#contact">Contact</a>
+                                </div>
+                            </div> -->
+                        </form>
+                        <!-- <a style="display: inline-block; width: 70%;">{{ file.file }}</a>
+                        <a style="display: inline-block; width: 5%;">
+                            <form method="post" action="{% url 'file_manager' %}" style="width: auto; height: auto;">
+                                {% csrf_token %}
+                                <input type="hidden"  value="{{ file }}">
+                                <button class="fa fa-trash" name="delete_file" style="color: #FC2D53; padding: 0; border: none; background: none;" type="submit" value="{{ file }}"></button>
+                            </form>
+                        </a> -->
+                        <!-- <a style="display: inline-block; width: 5%;">
+                            <form method="post" action="de" style="width: auto; height: auto;">
+                                {% csrf_token %}
+                                <input type="hidden" name="delete_file"  value="{{ file }}">
+                                <button class="fa fa-download" style="color: #FC2D53; padding: 0; border: none; background: none;" type="submit"></button>
+                            </form>
+                        </a> -->
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script>
+    const uploadButton = document.getElementById('uploadButton');
+    const fileInput = document.getElementById('fileInput');
+
+    uploadButton.addEventListener('click', () => {
+        fileInput.click(); 
+    });
+
+    fileInput.addEventListener('change', () => {
+        // Optionally, display the selected filename
+        const filename = fileInput.files[0].name;
+        alert(`Selected file: ${filename}`);
+
+        // Submit the form automatically
+        uploadButton.closest('form').submit();
+
+    
+    });
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+</html>

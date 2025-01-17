@@ -1,0 +1,3 @@
+django-icons
+django-mptt
+django-easy_thumbnails
