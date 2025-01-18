@@ -28,15 +28,19 @@
             <ul class="main-nav">
                 <!-- unordered list -->
                 <!-- list item -->
-                <!-- <li><a href="#home">Home</a></li> -->
-                 <li ><a href="file_manager"> <i class="fa fa-cloud" style="color: #74C0FC;" > </style></i> Cloud</a></li>
-                <!-- <li><a href="file_manager">Drive</a></li> -->
+                <li><a href="documents"><i class="fa fa-book-open" style="color: #74C0FC;" ></i> Tài liệu</a></li>
+                <li ><a href="file_manager"> <i class="fa fa-cloud" style="color: #74C0FC;" ></i> Cloud</a></li>
+                {% if authenticated %}
+                    <li><a href="logout">Logout</a></li>
+                {% else %}
+                    <li><a href="login">Login</a></li>
+                {% endif %}
                 <!-- <li><a href="#My Games">My Games</a></li> -->
             </ul>
         </nav>
         <div class="heading-main-box">
             <h1>Hola! I'm Khanh Nguyen Duy</h1>
-            <h2>this is my testing web</h2>
+            <h2>this is my website</h2>
             <div class="row">
                 <div class="icons">
                     <a href="https://www.instagram.com/ndkhanh.1308/" class="icon icon--instagram">
@@ -52,6 +56,9 @@
             </div>
         </div>
         <div class="content-main-box">
+            <h3>Content</h3>
+        </div>
+        <!-- <div class="content-main-box">
             <div class="col1">
             </div>
             <div class="col2">
@@ -70,7 +77,7 @@
                 <img src="./img/NDK-export.gif" alt="" >
             </div>
             <div class="col4"></div>
-        </div>
+        </div> -->
     </header>
     
     <!-- -------------------------------------------------------------------------------------------------------------- -->

@@ -16,6 +16,9 @@
 {% icon 'edit' %}
 <body>
     <div class="sidebar">
+        <div class="logo">
+            <img src="{% static 'img/Logo.png' %}" alt="">
+        </div>
         <ul>
             <!-- <form method="post" action="{% url 'file_manager' %}" style="width: 100px; height: 60px; display: inline-block;">
                 {% csrf_token %}
@@ -64,8 +67,8 @@
                 <form method="post" action="{% url 'file_manager' %}" style="width: 150px; height: 150px; display: inline-block;">
                     {% csrf_token %}
                     <button class="image-container" name="enter_folder" type="submit" value="{{folder}}" style="padding: 0; border: none; background: none;">
-                        <img src="{% static 'img/folder.png' %}" >
-                        <div class="folder-name">{{folder}}</div>
+                        <img src="{% static 'img/folder_2.png' %}">
+                        <div class="folder-name" style="color:  #FFF8DC,">{{folder}}</div>
                     </button>
                 </form>
                 {% endfor %}
@@ -76,12 +79,28 @@
                         <form method="post" action="{% url 'file_manager' %}" style="width: auto; height: auto;">
                             {% csrf_token %}
                             <input type="hidden"  value="{{ file }}">
-                            <button id="image-showing"type="submit" value="{{ file }}">
+                            <button id="image-showing"type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {% if file.type == 'image' %}
                                     <img src="{{file.source}}" alt="{{file.file}}">
                                 {% endif %}
                                 
                             </button>
+                            <div class="dropdown-menu" >
+                                <a style="display: inline-block; width: 5%;">
+                                    <form method="post" action="{% url 'file_manager' %}" style="width: 15px; height: 15px;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="download_file"  value="{{ file }}">
+                                        <button class="fa fa-download" style="color: #FC2D53; padding: 0; border: none; background: none;" type="submit" value="{{ file.id }}"></button>
+                                    </form>
+                                </a>
+                                <a style="display: inline-block; width: 5%;">
+                                    <form method="post" action="{% url 'file_manager' %}" style="width: 15px; height: 15px;">
+                                        {% csrf_token %}
+                                        <input type="hidden"  value="{{ file.source }}">
+                                        <button class="fa fa-trash" name="delete_file" style="color: #FC2D53; padding: 0; border: none; background: none;" type="submit" value="{{ file.url }}"></button>
+                                    </form>
+                                </a>
+                            </div>
                             <!-- <div class="dropdown">
                                 <button onclick="myFunction()" class="dropbtn">Dropdown</button>
                                 <div id="myDropdown" class="dropdown-content">

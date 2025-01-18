@@ -1,29 +1,39 @@
 import os
 import time
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from pathlib import Path
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.files.storage import FileSystemStorage
 from django.template import loader
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import UploadFileForm
-import tkinter
-from tkinter import filedialog
+from .models import Document
+from .forms import DocumentForm, UploadFileForm
+
+
 current_dir = ""
 old_dir = ""
-
+user_page = "home"
+is_authenticated = False
 def main(request):
-    global current_dir, old_dir
+    global current_dir, old_dir, is_authenticated
+    if not request.user.is_authenticated: is_authenticated = False
+    else: is_authenticated = True
+    print(is_authenticated)
     current_dir = ""
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'authenticated': is_authenticated})
 
 
 def file_manager_view(request):
-    global current_dir, old_dir
+    global current_dir, old_dir, user_page
+    user_page = 'file_manager'
+    if not request.user.is_authenticated:
+        return redirect('login')
     """View to display and manage files."""
     form =""
     fs = FileSystemStorage()
-    base_dir = '/home/ndk/Documents/ndkWeb/Media' + current_dir  # Replace with the actual directory
+    base_dir = os.path.join(Path(__file__).resolve().parent.parent, "Media") + current_dir
+    
     old_dir = base_dir
 
     files=[]
@@ -52,7 +62,7 @@ def file_manager_view(request):
             else: type = "nk"
             src = base_dir + "/" + b
             file_url = fs.url(src)
-            file = {'file':b , 'type': type, 'source': file_url}
+            file = {'file':b , 'type': type, 'source': file_url, 'url': src}
             files.append(file)
     # files = [f for f in os.listdir(base_dir) if os.path.isfile(os.path.join(base_dir, f))]
     folders = [f for f in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, f))]
@@ -77,6 +87,17 @@ def file_manager_view(request):
             if os.path.exists(file_path):
                 os.remove(file_path)
             return redirect('file_manager')
+        elif 'download_file' in request.POST:
+            file_id = request.POST['download_file']
+            # file_path = os.path.join(base_dir, file_name)
+            file_object = get_object_or_404(pk=file_id) 
+            try:
+                with open(file_object.file.path, 'rb') as f:  # Open the file in binary mode for reading
+                    response = HttpResponse(f.read(), content_type="application/force-download")
+                    response['Content-Disposition'] = 'attachment; filename="%s"' % file_object.file.name
+                    return response
+            except FileNotFoundError:
+                raise Http404("File not found.") 
             
     # files = [f for f in os.listdir(base_dir) if os.path.isfile(os.path.join(base_dir, f))]
     
@@ -93,13 +114,40 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('user_page')  # Redirect to the user page
+                return redirect(user_page)  # Redirect to the user page
             else:
                 # Invalid login credentials
                 form.add_error(None, "Invalid username or password.")
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'registration/login.html', {'form': form})
+
+
+def logout_view(request):
+    if request.user.is_authenticated == True:
+        username = request.user.username
+    else:
+        username = None
+    if username != None:
+        logout(request)
+        return redirect('home')
+
+def registry_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect(user_page)  # Redirect to the user page
+            else:
+                # Invalid login credentials
+                form.add_error(None, "Invalid username or password.")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/registry.html')
 
 
 def handle_uploaded_file(f, dir, files):
@@ -119,3 +167,24 @@ def handle_uploaded_file(f, dir, files):
     with open(file_path, "wb+") as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
+
+
+def document_list(request):
+    documents = Document.objects.all()
+    return render(request, 'Documents/document_list.html', {'documents': documents})
+
+def upload_document(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('document_list')
+    else:
+        form = DocumentForm()
+    return render(request, 'Documents/upload_document.html', {'form': form})
+
+def delete_document(request, document_id):
+    document = get_object_or_404(Document, pk=document_id)
+    document.delete()
+    return redirect('document_list')

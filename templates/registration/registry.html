@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html>
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registry Form | NDKweb</title>
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  
+</head>
+<body>
+    
+    <div class="wrapper">
+        <form method="post">
+            {% csrf_token %}
+            <h2>Registry</h2>
+            <div class="input-field">
+                <input type="text" name="username" id="username" required>
+                <label>Username or Email</label>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" id="password" required>
+                <label>Enter your password</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="confirm_password" name="confirm_password" required>
+                <label>Confirm Password</label>
+              </div>
+            <button type="submit">Registry</button>
+        </form>
+    </div>
+    <script>
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm_password');
+    
+        confirmPasswordInput.addEventListener('input', () => {
+          if (passwordInput.value !== confirmPasswordInput.value) {
+            confirmPasswordInput.setCustomValidity("Passwords don't match");
+          } else {
+            confirmPasswordInput.setCustomValidity(''); 
+          }
+        });
+      </script>
+</body>
+</html>

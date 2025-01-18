@@ -1,0 +1,189 @@
+body {
+    background-image: linear-gradient(135deg, rgba(6,6,7, 0.6), rgba(17,31,40,0.65), rgba(72,78,82,0.7)), url(../img/Library.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: "Roboto", serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    width: 150px;
+    /* background-color: #f4f4f4; */
+    background-image: linear-gradient(135deg, rgba(85, 85, 128, 0.6), rgba(31, 40, 45, 0.65), rgba(101, 105, 108, 0.7));
+    padding: 20px;
+    float: left;
+    height: 100%;
+    position: fixed; /* Keep sidebar fixed */
+}
+.sidebar .logo img{
+    width: 80px;
+    height: 80px;
+    /* position: absolute; */
+    transform: translate(25%, 25%);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.sidebar li {
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.sidebar li.active {
+    background-color: #ddd;
+}
+
+.sidebar i {
+    margin-right: 10px;
+}
+.sidebar ul form button#uploadButton{
+    width: 100px;
+    height: 60px; 
+    background-color: white; 
+    border: none;
+    border-top-left-radius: 30%;
+    border-bottom-left-radius: 30%;
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+}
+.sidebar ul form button{
+    width: 100px; 
+    height: 40px;
+    padding: 0; 
+    border: none; 
+    background: none;
+}
+
+
+.main-content {
+    /* background-color: rgb(17, 13, 49); */
+    margin-left: 270px;
+    padding: 20px;
+    height: fit-content;
+}
+
+.file-list li{
+    display: inline-block;
+}
+.file-list form{
+    margin: 5px;
+    width: 180px;
+    height: 180px;
+}
+.file-list button#image-showing{
+    background-color: rgb(43, 38, 48); 
+    border: none; 
+    width: 180px;
+    height: 180px;
+    display: inline-block;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+}
+
+.file-list button#image-showing img{
+    background-color: whitesmoke; 
+    padding: 0;
+    margin: 0;
+    width: 170px;
+    height: 170px;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+}
+
+.file-list{
+    /* border: 1px solid #ddd; */
+    padding: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    /* display: flex; Enable flexbox for icon and name alignment */
+    align-items: center; /* Align items vertically */
+}
+
+.file-list img, .file-list i {
+    margin-right: 10px;
+}
+
+/* .main-content .file-list form button{
+    padding: 0;
+    border: none;
+    background: none;
+} */
+/* .image-container {
+  position: relative; 
+} */
+.image-container{
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    position: relative; 
+}
+.image-container img {
+    display: block; /* Ensures the image takes up the full width of its container */
+    width: 100%; 
+    height: auto; 
+}
+
+.folder-name{
+    position: absolute; /* Positions the text relative to the image container */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the text both horizontally and vertically */
+    color: rgb(238, 237, 237); /* Adjust text color as needed */
+    font-size: 20px; /* Adjust font size as needed */
+    text-align: center;
+}
+
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}

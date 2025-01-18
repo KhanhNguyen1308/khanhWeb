@@ -1,16 +1,27 @@
 body {
+    background-image: linear-gradient(135deg, rgba(6,6,7, 0.6), rgba(17,31,40,0.65), rgba(72,78,82,0.7)), url(../img/Library.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     font-family: "Roboto", serif;
     margin: 0;
     overflow-x: hidden;
 }
 
 .sidebar {
-    width: 200px;
-    background-color: #f4f4f4;
+    width: 150px;
+    /* background-color: #f4f4f4; */
+    background-image: linear-gradient(135deg, rgba(85, 85, 128, 0.6), rgba(31, 40, 45, 0.65), rgba(101, 105, 108, 0.7));
     padding: 20px;
     float: left;
     height: 100vh;
     position: fixed; /* Keep sidebar fixed */
+}
+.sidebar .logo img{
+    width: 80px;
+    height: 80px;
+    /* position: absolute; */
+    transform: translate(25%, 25%);
 }
 
 .sidebar ul {
@@ -50,10 +61,10 @@ body {
 
 
 .main-content {
-    background-color: rgb(17, 13, 49);
+    /* background-color: rgb(17, 13, 49); */
     margin-left: 270px;
     padding: 20px;
-    height: 800px;
+    height: fit-content;
 }
 
 .file-list li{
@@ -65,33 +76,33 @@ body {
     height: 180px;
 }
 .file-list button#image-showing{
-    background-color: whitesmoke; 
+    background-color: rgb(43, 38, 48); 
     border: none; 
     width: 180px;
     height: 180px;
     display: inline-block;
-    border-top-left-radius: 25%;
-    border-bottom-left-radius: 25%;
-    border-top-right-radius: 25%;
-    border-bottom-right-radius: 25%;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
 }
 
 .file-list button#image-showing img{
     background-color: whitesmoke; 
     padding: 0;
     margin: 0;
-    width: 160px;
-    height: 160px;
-    border-top-left-radius: 25%;
-    border-bottom-left-radius: 25%;
-    border-top-right-radius: 25%;
-    border-bottom-right-radius: 25%;
+    width: 170px;
+    height: 170px;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
 }
 
 .file-list{
     /* border: 1px solid #ddd; */
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
     cursor: pointer;
     /* display: flex; Enable flexbox for icon and name alignment */
     align-items: center; /* Align items vertically */
