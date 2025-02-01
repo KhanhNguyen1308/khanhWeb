@@ -152,3 +152,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = BASE_DIR /'Media/'
 
 MEDIA_URL = '/Media/'
+
+DOCUMENT_ROOT = BASE_DIR /'Documents'  # Where uploaded files will be stored
+DOCUMENT_URL = '/Documents/'  

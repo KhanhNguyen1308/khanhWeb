@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from home.views import file_manager_view, login_view, logout_view, registry_view, main
 from home.views import document_list, delete_document, upload_document
 from django.contrib.auth import views as auth_views
@@ -29,7 +29,7 @@ urlpatterns = [
     path("", main, name="home"),
     path('admin/', admin.site.urls),
     path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'), 
+    re_path('logout/', logout_view, name='logout'), 
     path('registry/', registry_view, name="registry"),
     # path('login/',auth_views.LoginView.as_view(template_name="registration/login.html"), name="login"),
     path('admin/filer/', include('filer.urls')),
@@ -40,5 +40,6 @@ urlpatterns = [
     path('delete/<int:document_id>/', delete_document, name='delete_document'),
 ]
 if settings.DEBUG: 
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.DOCUMENT_URL,document_root=settings.DOCUMENT_ROOT)
+    
+    

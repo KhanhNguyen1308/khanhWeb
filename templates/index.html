@@ -26,16 +26,11 @@
         <nav>
             <a href="#"><img class="logo" src="img/logo.png" alt=""></a>
             <ul class="main-nav">
-                <!-- unordered list -->
-                <!-- list item -->
                 <li><a href="documents"><i class="fa fa-book-open" style="color: #74C0FC;" ></i> Tài liệu</a></li>
                 <li ><a href="file_manager"> <i class="fa fa-cloud" style="color: #74C0FC;" ></i> Cloud</a></li>
-                {% if authenticated %}
-                    <li><a href="logout">Logout</a></li>
-                {% else %}
-                    <li><a href="login">Login</a></li>
+                {% if authenticated %} <li><a href="logout">Logout</a></li>
+                {% else %} <li><a href="login">Login</a></li>
                 {% endif %}
-                <!-- <li><a href="#My Games">My Games</a></li> -->
             </ul>
         </nav>
         <div class="heading-main-box">
@@ -80,138 +75,8 @@
         </div> -->
     </header>
     
-    <!-- -------------------------------------------------------------------------------------------------------------- -->
-    <!-- ----------------------------------------Tools Section--------------------------------------------------------- -->
-    <!-- -------------------------------------------------------------------------------------------------------------- -->
-    <!-- <section class="Tool-Section" id="My Tools">
-        <h2>My Tools</h2>
-        <div class="tab">
-            <button class="tablinks" onclick="openTool(event, 'RGB to Hex')">RGB to Hex</button>
-            <button class="tablinks" onclick="openTool(event, 'Hex to RGB')">Hex to RGB</button>
-            <button class="tablinks" onclick="openTool(event, 'Smart age calculator')">Smart age calculator</button>
-        </div>
-        
-        <div id="RGB to Hex" class="tabcontent">
 
-            <div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div>
-            <div class="row">
-                <div class="col2">
-                    <p>R    </p>
-                    <input type="number" onchange="this.value = Math.max(0, Math.min(255, parseInt(this.value)));" id="rValue">
-                </div>
-                <div class="col2">
-                    <p>G    </p>
-                    <input type="number" onchange="this.value = Math.max(0, Math.min(255, parseInt(this.value)));" id="gValue">
-                </div>
-                <div class="col2">
-                    <p>B    </p>
-                    <input type="number" onchange="this.value = Math.max(0, Math.min(255, parseInt(this.value)));" id="bValue">
-                </div>
-            </div>
-            
-            <div class="row"></div>
-            <div class="row">
-                <div class="col2"><button type="button" onclick="RGBtoHEX()">Convert</button></div>
-                <div class="col2"># <input type="textbox" id="resultHexCode"></div>
-            </div>
-            <div class="row">
-                <div class="col3"><p id="rgbToHexMess"></p></div>
-            </div>
-            <div class="row"></div><div class="row"></div><div class="row"></div>
-            
-            
-        </div>
-        <div id="Hex to RGB" class="tabcontent">
-            
-            <div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div>
-            <div class="row">
-                <div class="col2">
-                    Enter Hex Value
-                </div>
-            </div>
-            <div class="row">
-                <div class="col1">Code</div>
-                <div class="col2">
-                    <input type="Text" maxlength="7" id="HEXCODE">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col2"><button type="button" onclick="HEXtoRGB()">Convert</button></div>
-                <div class="col2">
-                    <div class="row">
-                            <div class="icon" id="Red"></div>
-                            <input type="textbox" id="resultR">
-                    </div>
-                </div>
-                <div class="col2">
-                    <div class="row">
-                            <div class="icon" id="Green"></div>
-                            <input type="textbox" id="resultG">
-                    </div>
-                </div>
-                <div class="col2">
-                    <div class="row">
-                            <div class="icon" id="Blue">
-
-                            </div><input type="textbox" id="resultB">
-                    </div>
-                </div>
-            </div>
-            <div class="row"><div class="col2"><p id="HexToRGBMess"></p></div></div>
-            <div class="row"></div><div class="row"></div><div class="row"></div><div class="row"></div>
-        </div>
-        <div id="Smart age calculator" class="tabcontent">
-
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row">
-                <div class="col2">
-                    Enter your Age
-                </div>
-            </div>
-            <div class="row">
-                <div class="col1">age</div>
-                <div class="col2">
-                    <input type="number" onchange="this.value = Math.max(0, Math.min(999, parseInt(this.value)));" maxlength="3" id="Age">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col2"><button type="button" onclick="ageCal()">Calculate</button></div>
-            </div>
-            <div class="row">
-                <p id="age_calculate"></p>
-            </div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-        </div>
-    </section> -->
-    <!-- --------------------------------------------------------------------------------------------------------------- -->
-    <!-- --------------------------------------Games-Section--------------------------------------------------------- -->
-    <!-- --------------------------------------------------------------------------------------------------------------- -->
-    <!-- <section class="Game-Section" id="My Games">
-        <h2>My Games</h2>
-        <div class="tab">
-            <button class="tablinks" onclick="openGame(event, 'SnakeGame')" >Snake Game</button>
-        </div>
-
-        <div id="SnakeGame" class="tabcontent">
-            <div class="row">
-                <div class="col2"><button onclick="init()" id="StartGameBtn">Start Game</button></div>
-                <div class="col2">Use WASD to play</div>
-            </div>
-            <div class="row">
-                <canvas id="mySnakeGame" width="400" height="400"></canvas>
-            </div>
-        </div>
-    </section> -->
-    <!-- -------------------------------------------------------------------------------------------------------------- -->
-    <!-- --------------------------------------Contact Section--------------------------------------------------------- -->
-    <!-- -------------------------------------------------------------------------------------------------------------- -->
-   
+    <!--===========================================SCRIPTS=======================================================-->
     <script src="https://code.jquery.com/jquery-3.5.1.js" 
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
     crossorigin="anonymous"></script>
@@ -219,5 +84,7 @@
     <script src="js/scripts.js"></script>
     <script type="text/javascript" src="js/toolfuntion.js"></script>
     <script type="text/javascript" src="js/SnakeGame.js"></script>
+    <!--===========================================SCRIPTS=======================================================-->
 </body>
+
 </html>

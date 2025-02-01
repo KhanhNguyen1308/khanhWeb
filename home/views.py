@@ -169,16 +169,34 @@ def handle_uploaded_file(f, dir, files):
             destination.write(chunk)
 
 
+# def document_list(request):
+#     documents = Document.objects.all()
+#     return render(request, 'Documents/document_list.html', {'documents': documents,
+#                                                             'authenticated': is_authenticated})
 
 def document_list(request):
-    documents = Document.objects.all()
-    return render(request, 'Documents/document_list.html', {'documents': documents})
+    global is_authenticated, user_page
+    user_page = "document_list"
+    if not request.user.is_authenticated:
+        return redirect('login')
+    if not request.user.is_authenticated: is_authenticated = False
+    else: is_authenticated = True
+    base_dir = os.path.join(Path(__file__).resolve().parent.parent, "Media") + "/Documents"
+    documents = []
+    urls = []
+    for f in os.listdir(base_dir):
+        if os.path.isfile(os.path.join(base_dir, f)):
+            documents.append({'file':f,'url': os.path.join(base_dir, f)})
+    return render(request, 'Documents/document_list.html', {'documents': documents,
+                                                            'authenticated': is_authenticated,})
 
 def upload_document(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            print(form)
+            print("form save")
             return redirect('document_list')
     else:
         form = DocumentForm()
