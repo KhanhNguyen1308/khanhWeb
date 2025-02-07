@@ -1,3 +1,4 @@
 django-icons
 django-mptt
 easy-thumbnails
+django-filer
