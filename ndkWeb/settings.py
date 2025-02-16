@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://ndk.khanhnguyenduy1308.com',
+    'http://ndk.khanhnguyenduy1308.com'
+]
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure-#!3inpml%+sz2d-o6^#5ow@q$1*c9eus3u17yw@7gxkbruyx2h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','ndk.khanhnguyenduy1308.com', '192.168.1.28']
+ALLOWED_HOSTS = ['127.0.0.1','ndk.khanhnguyenduy1308.com', '192.168.1.28', '192.168.1.138']
 
 
 # Application definition
