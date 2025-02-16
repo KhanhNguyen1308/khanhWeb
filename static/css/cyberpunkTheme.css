@@ -1,0 +1,106 @@
+.cyberpunkHeader {
+
+    color: #E2595A
+}
+
+
+.cyberpunk-text {
+    position: absolute; /* Positions the text relative to the image container */
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%); /* Centers the text both horizontally and vertically */
+    text-align: center;
+    font-size: 15px; /* Adjust size as needed */
+    font-family: 'Roboto Mono', monospace;
+    color: #61DBF2; /* Green glow */
+    text-shadow: 0 0 10px #61DBF2, 0 0 20px #61DBF2, 0 0 30px #61DBF2; /* Glow effect */
+    animation: flicker 1s infinite; /* Add flicker animation */
+  }
+  
+  @keyframes flicker {
+    0% {
+      opacity: 1;
+      text-shadow: 0 0 10px #61DBF2, 0 0 20px #61DBF2;
+    }
+    25% {
+      opacity: 0.8;
+      text-shadow: 0 0 5px #61DBF2, 0 0 10px #61DBF2;
+    }
+    50% {
+      opacity: 1;
+      text-shadow: 0 0 15px #61DBF2, 0 0 25px #61DBF2;
+    }
+    75% {
+      opacity: 0.7;
+      text-shadow: 0 0 2px #61DBF2, 0 0 5px #61DBF2;
+    }
+    100% {
+      opacity: 1;
+      text-shadow: 0 0 10px #61DBF2, 0 0 20px #61DBF2;
+    }
+  }
+  
+  /* Optional: Add a neon outline effect */
+  .cyberpunk-text.neon {
+    color: #61DBF2;
+    text-shadow: 0 0 5px #61DBF2, 0 0 10px #61DBF2, 0 0 15px #61DBF2, 0 0 20px #61DBF2, 0 0 25px #61DBF2, 0 0 30px #61DBF2, 0 0 35px #61DBF2;
+  }
+  
+  /* Optional: Add a glitch effect */
+  .cyberpunk-text.glitch {
+    animation: glitch 0.5s infinite;
+  }
+  
+  @keyframes glitch {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-2px, -2px); }
+    20% { transform: translate(2px, 2px); }
+    30% { transform: translate(-1px, 1px); }
+    40% { transform: translate(1px, -1px); }
+    50% { transform: translate(0, 0); }
+    60% { transform: translate(-2px, 1px); }
+    70% { transform: translate(2px, -2px); }
+    80% { transform: translate(-1px, -1px); }
+    90% { transform: translate(1px, 2px); }
+    100% { transform: translate(0, 0); }
+  }
+
+
+
+.cyberpunk-image {
+    position: relative; /* Needed for pseudo-elements */
+    overflow: hidden; /* Prevents glow from spilling out */
+}
+
+
+/* .cyberpunk-image {
+  animation: glitchImage 0.5s infinite;
+}
+
+@keyframes glitchImage {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-2px, -2px); }
+  20% { transform: translate(2px, 2px); }
+  100% { transform: translate(0, 0); }
+} */
+.cyberpunk-image {
+    filter: drop-shadow(-5px 0 #FF88FF) drop-shadow(5px 0 #73FFFF); /* Adjust values */
+}
+.cyberpunk-image::before { /* Glow effect */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 255, 0, 0.5); /* Neon green, adjust as needed */
+    opacity: 0.5; /* Adjust glow intensity */
+    filter: blur(10px); /* Soften the glow */
+    z-index: -1; /* Place behind the image */
+}
+  
+.cyberpunk-image img {
+    display: block; /* Prevents a small gap below the image */
+    width: 100%;
+    height: auto;
+}

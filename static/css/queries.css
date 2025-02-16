@@ -2,9 +2,10 @@
     h1{font-size: 100%;}
     h2{font-size: 100%;}
     h3{font-size: 100%;}
-    header{max-width: 100%; height: auto;}
+    .main-nav li{margin-top: 10px;}
+    /* header{width: 100%; height: auto;} */
     header#home a{font-size: 50%;}
-    .heading-main-box{top: 10%; left: 15%;}
+    .heading-main-box{top: 5%; left: 15%;}
     .content-main-box{top: 25%;}
     .col1{width: 10%;}
     .col2{width: 50%;}
@@ -14,11 +15,12 @@
 
 @media only screen and (min-width:401px) and (max-width:800px){
     h1{font-size: 70%;}
-    h2{font-size: 70%;}
+    h2{font-size: 70%; margin-top: 15px; margin-bottom: 15px;}
     h3{font-size: 70%;}
-    header{max-width: 100%; height: auto;}
     header#home a{font-size: 50%;}
-    .heading-main-box{top: 10%; left: 15%;}
+    /* header{width: 100%; height: auto;} */
+    .main-nav li{margin-top: 5px; margin-right: 5px;}
+    .heading-main-box{top: 2.5%; left: 15%;}
     .content-main-box{top: 25%;}
     .col1{width: 10%;}
     .col2{width: 50%;}

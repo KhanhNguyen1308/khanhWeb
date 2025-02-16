@@ -1,17 +1,19 @@
 body {
-    background-image: linear-gradient(135deg, rgba(6,6,7, 0.6), rgba(17,31,40,0.65), rgba(72,78,82,0.7)), url(../img/Library.jpg);
+    background-image: linear-gradient(135deg, rgba(6,6,7, 0.6), rgba(17,31,40,0.65), rgba(72,78,82,0.7)), url(../img/CyberLibrary.png);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    font-family: "Roboto", serif;
+    font-family: 'Roboto Mono', monospace;
     margin: 0;
     overflow-x: hidden;
 }
 
 .sidebar {
-    width: 150px;
+    width: 180px;
     /* background-color: #f4f4f4; */
-    background-image: linear-gradient(135deg, rgba(85, 85, 128, 0.6), rgba(31, 40, 45, 0.65), rgba(101, 105, 108, 0.7));
+    /* background-image: linear-gradient(135deg, rgba(85, 85, 128, 0.6), rgba(31, 40, 45, 0.65), rgba(101, 105, 108, 0.7)); */
+    background-image: linear-gradient(135deg, rgba(58, 1, 27, 0.6), rgba(49, 0, 22, 0.65), rgba(38, 1, 18, 0.7));
+
     padding: 20px;
     float: left;
     height: 100vh;
@@ -52,19 +54,30 @@ body {
     border-bottom-right-radius: 30%;
 }
 .sidebar ul form button{
-    width: 100px; 
+    width: 115px; 
     height: 40px;
     padding: 0; 
     border: none; 
     background: none;
+    color: #E2595A;
 }
 
+.sidebar ul form button:hover{
+    color:#61DBF2;
+    background-color: #E2595A;
+    opacity: 0.5;
+}
 
 .main-content {
     /* background-color: rgb(17, 13, 49); */
     margin-left: 270px;
     padding: 20px;
     height: fit-content;
+}
+.main-content h2{
+    font-family: 'Roboto Mono', monospace;
+    margin-left: 10%; 
+    color: #E2595A;
 }
 
 .file-list li{
@@ -131,7 +144,6 @@ body {
     width: 100%; 
     height: auto; 
 }
-
 .folder-name{
     position: absolute; /* Positions the text relative to the image container */
     top: 50%;
@@ -139,6 +151,7 @@ body {
     transform: translate(-50%, -50%); /* Centers the text both horizontally and vertically */
     color: rgb(238, 237, 237); /* Adjust text color as needed */
     font-size: 20px; /* Adjust font size as needed */
+    font-family: 'Roboto Mono', monospace;
     text-align: center;
 }
 

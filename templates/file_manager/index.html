@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css'%}">
     <link rel="stylesheet" href="{% static 'fontawesome/css/all.css'%}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'css/cyberpunkTheme.css' %}">
     <link rel="stylesheet" href="{% static 'css/drive.css' %}">
     <link rel="stylesheet" href="{% static 'css/queries.css' %}">
     <script src="{% static 'js/scripts.js' %}"></script>
@@ -18,15 +19,10 @@
 {% icon 'edit' %}
 <body>
     <div class="sidebar">
-        <div class="logo">
-            <img src="{% static 'img/Logo.png' %}" alt="">
-        </div>
+        <!-- <div class="logo">
+            <img src="{% static 'img/LogoNew.png' %}" alt="">
+        </div> -->
         <ul>
-            <!-- <form method="post" action="{% url 'file_manager' %}" style="width: 100px; height: 60px; display: inline-block;">
-                {% csrf_token %}
-                <input type="hidden"  value="a">
-                <button id="uploadbut" name="uploadFile" type="submit" value="a">Upload</button>
-            </form> -->
             <form method="post" action="{% url 'file_manager' %}" enctype="multipart/form-data" style="width: 100px; height: 60px; display: inline-block;">
                 {% csrf_token %}
                 {{ form.file }} 
@@ -45,7 +41,7 @@
             <form method="post" action="{% url 'file_manager' %}"style="width: 150px; height: 45x; display: inline-block;">
                 {% csrf_token %}
                 <button name="return_home" type="submit" value="">
-                    <li class="active" style="text-align: left;"><i class="fas fa-hdd fa-2x" style="width: 30%;float: left; position: relative; bottom: 5px;"></i> My Drive</li>
+                    <li style="text-align: left;"><i class="fas fa-hdd fa-2x" style="width: 30%;float: left; position: relative; bottom: 5px;"></i> My Drive</li>
                 </button>
             </form>
             <form method="post" action="{% url 'file_manager' %}"style="width: 150px; height: 45x; display: inline-block;">
@@ -62,15 +58,15 @@
     </div>
 
     <div class="main-content">
-        <h2 style="margin-left: 10%; color: aliceblue;">My Drive</h2>
+        <h2>My Drive</h2>
         <div class="file-list">
             <ul style="list-style-type: none;">
                 {% for folder in folders %}
                 <form method="post" action="{% url 'file_manager' %}" style="width: 150px; height: 150px; display: inline-block;">
                     {% csrf_token %}
                     <button class="image-container" name="enter_folder" type="submit" value="{{folder}}" style="padding: 0; border: none; background: none;">
-                        <img src="{% static 'img/folder_2.png' %}">
-                        <div class="folder-name" style="color:  #FFF8DC,">{{folder}}</div>
+                        <img class="cyberpunk-image" src="{% static 'img/CyberFolder.png' %}">
+                        <div class="cyberpunk-text">{{folder}}</div>
                     </button>
                 </form>
                 {% endfor %}
@@ -83,7 +79,7 @@
                             <input type="hidden"  value="{{ file }}">
                             <button id="image-showing"type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {% if file.type == 'image' %}
-                                    <img src="{{file.source}}" alt="{{file.file}}">
+                                    <img src="{{file.url}}" alt="{{file.file}}">
                                 {% endif %}
                                 
                             </button>
@@ -103,71 +99,11 @@
                                     </form>
                                 </a>
                             </div>
-                            <!-- <div class="dropdown">
-                                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-                                <div id="myDropdown" class="dropdown-content">
-                                  <a href="#home">Home</a>
-                                  <a href="#about">About</a>
-                                  <a href="#contact">Contact</a>
-                                </div>
-                            </div> -->
                         </form>
-                        <!-- <a style="display: inline-block; width: 70%;">{{ file.file }}</a>
-                        <a style="display: inline-block; width: 5%;">
-                            <form method="post" action="{% url 'file_manager' %}" style="width: auto; height: auto;">
-                                {% csrf_token %}
-                                <input type="hidden"  value="{{ file }}">
-                                <button class="fa fa-trash" name="delete_file" style="color: #FC2D53; padding: 0; border: none; background: none;" type="submit" value="{{ file }}"></button>
-                            </form>
-                        </a> -->
-                        <!-- <a style="display: inline-block; width: 5%;">
-                            <form method="post" action="de" style="width: auto; height: auto;">
-                                {% csrf_token %}
-                                <input type="hidden" name="delete_file"  value="{{ file }}">
-                                <button class="fa fa-download" style="color: #FC2D53; padding: 0; border: none; background: none;" type="submit"></button>
-                            </form>
-                        </a> -->
                     </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
 </body>
-
-<script>
-    const uploadButton = document.getElementById('uploadButton');
-    const fileInput = document.getElementById('fileInput');
-
-    uploadButton.addEventListener('click', () => {
-        fileInput.click(); 
-    });
-
-    fileInput.addEventListener('change', () => {
-        // Optionally, display the selected filename
-        const filename = fileInput.files[0].name;
-        alert(`Selected file: ${filename}`);
-
-        // Submit the form automatically
-        uploadButton.closest('form').submit();
-
-    
-    });
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
 </html>

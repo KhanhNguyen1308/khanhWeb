@@ -52,6 +52,7 @@ div {
 
 
 h1{
+    font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
     font-size: 200%;
     letter-spacing: 1px;
@@ -62,6 +63,7 @@ h1{
 }
 
 h2{
+    font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #f38406;
@@ -69,6 +71,7 @@ h2{
 }
 
 h3{
+    font-family: 'Roboto Mono', monospace;
     padding-top: 30px;
     padding-bottom: 10px;
     color: #f5f6fa;
@@ -103,17 +106,20 @@ header{
 }
 
 .main-nav li a{
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Roboto Mono', monospace;
     text-decoration: none;
-    color: #f5f6fa;
+    color: #E2595A;
     font-size: 110%;
     font-weight: 700;
     transition: .5s;
 }
 
+.main-nav li a:hover{
+    color: #61DBF2;
+}
 .main-nav li:hover,
 .main-nav li:active{
-    border-bottom: 2px solid #f5f6fa;
+    border-bottom: 2px solid #61DBF2;
 }
 
 
@@ -347,4 +353,7 @@ NDK_img{
 }
 #Blue{
     background-color: #0000FF;
+}
+#CyberRed{
+    background-color: #E2595A;
 }

@@ -1,15 +1,15 @@
 import os
 import time
 from pathlib import Path
+from .models import Document
+from django.conf import settings
+from django.template import loader
+from .forms import DocumentForm, UploadFileForm
+from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.core.files.storage import FileSystemStorage
-from django.template import loader
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
-from .models import Document
-from .forms import DocumentForm, UploadFileForm
-
 
 current_dir = ""
 old_dir = ""
@@ -32,8 +32,8 @@ def file_manager_view(request):
     """View to display and manage files."""
     form =""
     fs = FileSystemStorage()
-    base_dir = os.path.join(Path(__file__).resolve().parent.parent, "Media") + current_dir
-    
+    if current_dir != "": base_dir = os.path.join(settings.MEDIA_ROOT, current_dir)
+    else: base_dir = settings.MEDIA_ROOT
     old_dir = base_dir
 
     files=[]
@@ -61,6 +61,7 @@ def file_manager_view(request):
                 type = 'zip'
             else: type = "nk"
             src = base_dir + "/" + b
+            src = src.replace("\\", "/")
             file_url = fs.url(src)
             file = {'file':b , 'type': type, 'source': file_url, 'url': src}
             files.append(file)
@@ -74,9 +75,12 @@ def file_manager_view(request):
         else:
             form = UploadFileForm()
         if 'enter_folder' in request.POST: 
-            if not os.path.isdir(base_dir + "/" +request.POST['enter_folder']): pass
+            folder_direct = os.path.join(base_dir,request.POST['enter_folder'])
+            if not os.path.isdir(folder_direct): pass
             # else: current_dir += "/" + request.POST['enter_folder']
-            else: current_dir += "/" + request.POST['enter_folder']
+            else: 
+                if current_dir != "": current_dir += "\\" + request.POST['enter_folder']
+                else: current_dir = request.POST['enter_folder']
             return redirect('file_manager')
         elif 'return_home' in request.POST: 
             current_dir =""
